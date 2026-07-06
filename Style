@@ -1,0 +1,457 @@
+/* Base Style Setup */
+:root {
+    --bg-light: #ecebe6;        /* Matches the soft cream background of the video */
+    --text-dark: #111111;
+    --text-muted: #555555;
+    --bg-dark: #161616;         /* Matches the charcoal manifesto block */
+    --border-color: #cccccc;
+    --font-primary: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+/* --- Sticky Header / Navbar --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    z-index: 1000;
+    mix-blend-mode: difference; /* Keeps menu visible over dynamic light/dark sections */
+}
+
+/* White baseline style for menu typography text inversion */
+.brand-logo, .menu-text {
+    color: #ffffff; 
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 22px;
+    height: 10px;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background-color: #ffffff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hamburger state shifts to an 'X' icon when open */
+.menu-open .hamburger-icon span:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+}
+.menu-open .hamburger-icon span:nth-child(2) {
+    transform: translateY(-4.5px) rotate(-45deg);
+}
+
+/* --- Fullscreen Overlay Menu --- */
+.fullscreen-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-light);
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fullscreen-menu.active {
+    transform: translateY(0);
+}
+
+.menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.menu-item {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: opacity 0.2s ease;
+}
+
+.menu-item:hover {
+    opacity: 0.6;
+}
+
+/* --- Hero Layout --- */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px 24px 60px 24px;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+}
+
+.hero-title {
+    font-size: clamp(3.2rem, 12vw, 4.8rem);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+    font-weight: 400;
+    margin-bottom: 36px;
+    max-width: 320px;
+}
+
+/* Prominent Full Width / Large Action Button styling */
+.btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: var(--text-dark);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    padding: 22px 0;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #222222;
+}
+
+/* --- The Edit Section Grid --- */
+.curation-section {
+    padding: 80px 24px;
+}
+
+.section-header {
+    margin-bottom: 48px;
+}
+
+.section-number {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.section-tag {
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-top: 12px;
+}
+
+/* Creates the overlapping layout seen in the product frames */
+.product-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.product-card {
+    width: 100%;
+}
+
+.img-wrapper {
+    background-color: #e5e5e5;
+    overflow: hidden;
+    width: 100%;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .img-wrapper img {
+    transform: scale(1.03);
+}
+
+.tall-card .img-wrapper {
+    aspect-ratio: 3 / 4;
+}
+
+.shifted-card {
+    align-self: flex-end;
+    padding-left: 15%; /* Indents element to create asymmetry */
+}
+
+.shifted-card .img-wrapper {
+    aspect-ratio: 1 / 1;
+}
+
+.product-info {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.product-num {
+    color: var(--text-muted);
+}
+
+/* --- Dark Accent Block (Manifesto) --- */
+.manifesto-section {
+    background-color: var(--bg-dark);
+    color: #ffffff;
+    padding: 100px 24px;
+}
+
+.container-narrow {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.manifesto-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #888888;
+    display: block;
+    margin-bottom: 28px;
+}
+
+.manifesto-text {
+    font-size: 1.8rem;
+    line-height: 1.35;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    color: #aaaaaa;
+}
+
+.highlight-text {
+    color: #ffffff;
+}
+
+.accent-line {
+    width: 60px;
+    height: 1px;
+    background-color: #b94a24; /* Subtle contrasting thin brown line line indicator */
+    margin-top: 40px;
+}
+
+/* --- Review / Testimonial Block --- */
+.testimonial-section {
+    padding: 100px 24px;
+    text-align: center;
+}
+
+.quote-mark {
+    font-size: 4rem;
+    font-family: serif;
+    color: #b94a24;
+    display: block;
+    line-height: 1;
+    margin-bottom: -10px;
+}
+
+.testimonial-quote {
+    font-size: 1.35rem;
+    line-height: 1.5;
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 24px;
+    color: var(--text-dark);
+}
+
+.testimonial-author {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    display: block;
+}
+
+/* --- Newsletter Block --- */
+.newsletter-section {
+    padding: 60px 24px 100px 24px;
+}
+
+.newsletter-box {
+    background-color: #e3e2dc;
+    padding: 60px 24px;
+    text-align: center;
+}
+
+.newsletter-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+}
+
+.newsletter-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    line-height: 1.4;
+}
+
+.newsletter-form {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.input-group {
+    border-bottom: 1px solid #aaaaaa;
+    margin-bottom: 24px;
+}
+
+.newsletter-form input {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 12px 0;
+    font-size: 0.9rem;
+    text-align: center;
+    letter-spacing: 0.1em;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--text-dark);
+    color: #ffffff;
+    border: none;
+    padding: 18px 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+}
+
+/* --- Footer Area --- */
+.footer {
+    padding: 40px 24px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 1.1rem;
+}
+
+.footer-socials a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: 16px;
+}
+
+.footer-bottom p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+/* --- Tablet and Desktop Adaptive Viewports --- */
+@media (min-width: 768px) {
+    .product-grid {
+        flex-direction: row;
+        gap: 40px;
+    }
+    .product-card {
+        flex: 1;
+    }
+    .shifted-card {
+        padding-left: 0;
+        margin-top: 120px; /* Offset alignment mimicking look on wide viewports */
+    }
+    .hero {
+        padding: 40px 60px 80px 60px;
+    }
+    .curation-section, .manifesto-section, .testimonial-section, .newsletter-section, .footer {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
